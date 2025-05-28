@@ -3,15 +3,16 @@ from datetime import datetime, timedelta
 from requests.auth import HTTPBasicAuth
 import psycopg2
 from psycopg2.extras import Json
+import os
 
 USERNAME = 'norismike_sioutas_ioannis'
 PASSWORD = 'c9Do8HX7ip'
 DB_PARAMS = {
-    'dbname': 'weatherdb',
-    'user': 'postgres',
-    'password': '6980368134Aa!',
-    'host': 'localhost',
-    'port': 5432
+    'dbname':   os.environ.get('DB_NAME'),
+    'user':     os.environ.get('DB_USER'),
+    'password': os.environ.get('DB_PASSWORD'),
+    'host':     os.environ.get('DB_HOST'),
+    'port':     os.environ.get('DB_PORT', 5432),
 }
 
 LOCATIONS = {
