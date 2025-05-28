@@ -1,16 +1,17 @@
 from flask import Flask, jsonify, request
 import psycopg2
 from psycopg2.extras import RealDictCursor
+import os 
 
 app = Flask(__name__)
 
 # Database Connection
 DB_PARAMS = {
-    'dbname':   'weatherdb',
-    'user':     'postgres',
-    'password': '6980368134Aa!',
-    'host':     'localhost',
-    'port':     5432,
+    'dbname':   os.environ.get('DB_NAME'),
+    'user':     os.environ.get('DB_USER'),
+    'password': os.environ.get('DB_PASSWORD'),
+    'host':     os.environ.get('DB_HOST'),
+    'port':     os.environ.get('DB_PORT', 5432),
 }
 
 def get_conn():
