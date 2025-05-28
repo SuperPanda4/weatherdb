@@ -1,3 +1,5 @@
+CREATE SCHEMA IF NOT EXISTS raw_data
+
 -- this table stores json response as it is extracted from the api
 CREATE TABLE if not exists raw_data.raw_forecasts (
   json_data    JSONB     NOT NULL,
