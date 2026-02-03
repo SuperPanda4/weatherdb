@@ -4,9 +4,13 @@ from requests.auth import HTTPBasicAuth
 import psycopg2
 from psycopg2.extras import Json
 import os
+from dotenv import load_dotenv
 
-USERNAME = 'norismike_sioutas_ioannis'
-PASSWORD = 'c9Do8HX7ip'
+load_dotenv()
+
+USERNAME = os.getenv('METEO_USER')
+PASSWORD = os.getenv('METEO_PASS')
+
 DB_PARAMS = {
     'dbname':   os.environ.get('DB_NAME'),
     'user':     os.environ.get('DB_USER'),
@@ -56,3 +60,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
