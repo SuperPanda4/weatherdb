@@ -2,6 +2,9 @@ from flask import Flask, jsonify, request
 import psycopg2
 from psycopg2.extras import RealDictCursor
 import os 
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -143,3 +146,4 @@ def top_locations():
 # Run the app 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
+
