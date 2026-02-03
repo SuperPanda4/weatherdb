@@ -31,5 +31,30 @@ Ensure you have the following installed:
 ```bash
 git clone [https://github.com/SuperPanda4/weatherdb.git](https://github.com/SuperPanda4/weatherdb.git)
 cd weather_api
+```
 
-### 3.
+### 3. Environment Setup
+Create and activate a virtual environment to manage dependencies.
+
+**Windows:**
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+
+**Mac/Linux:**
+```
+python3 -m venv venv
+source venv/bin/activate
+```
+
+### 4. Install Dependencies
+pip install -r requirements.txt
+
+### 5. DB Configuration
+Open your terminal or SQL tool (like pgAdmin or psql).
+
+Create the database:
+<pre>
+CREATE DATABASE weatherdb;
+</pre>
