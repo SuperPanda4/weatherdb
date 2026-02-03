@@ -52,9 +52,38 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 ### 5. DB Configuration
-Open your terminal or SQL tool (like pgAdmin or psql).
+5.1. Open your terminal or SQL tool (like pgAdmin or psql).
 
-Create the database:
+5.2. Create the database:
 <pre>
 CREATE DATABASE weatherdb;
 </pre>
+
+5.3. Run the schema creation script provided in weatherdb.sql.
+
+<pre>
+INSERT INTO raw_data.parsed_forecasts 
+    (location_lat, location_lon, parameter, forecast_date, value, retrieved_at)
+SELECT 
+    (coord_elem ->> 'lat')::NUMERIC,
+    (coord_elem ->> 'lon')::NUMERIC,
+    data_elem ->> 'parameter',
+    (date_elem ->> 'date')::TIMESTAMP,
+    (date_elem ->> 'value')::NUMERIC,
+    rf.retrieved_at
+FROM raw_data.raw_forecasts AS rf
+    CROSS JOIN LATERAL jsonb_array_elements(rf.json_data -> 'data') AS data_elem
+    CROSS JOIN LATERAL jsonb_array_elements(data_elem -> 'coordinates') AS coord_elem
+    CROSS JOIN LATERAL jsonb_array_elements(coord_elem -> 'dates') AS date_elem;
+</pre>
+
+
+### 6. Run the APP
+```
+python app.py
+```
+
+The API server will start locally. You can access the endpoints at:
+
+Base URL: http://localhost:5000
+Locations Endpoint: http://localhost:5000/locations
